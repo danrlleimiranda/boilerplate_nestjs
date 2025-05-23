@@ -1,4 +1,4 @@
-import { ILogger } from '@infra/logger/logger.interface';
+import { ILogger } from '@core/lib/logger/logger.interface';
 import { IProductRepository } from '../../repositories/IProductRepository';
 import { IUseCase } from '@core/usecases/IUseCase';
 import {
@@ -8,7 +8,6 @@ import {
 import { Product } from '@domain/product/enterprise/entities/Product';
 import { CustomError } from '@core/errors/CustomError';
 import { UniqueEntityID } from '@core/entities/UniqueEntityId';
-import { Company } from '@domain/company/enterprise/entities/Company';
 import { ICompanyRepository } from '@domain/company/application/repositories/ICompanyRepository';
 
 export class UpdateProductUseCase implements IUseCase {

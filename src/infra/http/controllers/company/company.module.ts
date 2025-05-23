@@ -5,8 +5,7 @@ import { DeleteCompanyUseCase } from '@domain/company/application/usecases/comma
 import { UpdateCompanyUseCase } from '@domain/company/application/usecases/commands/UpdateCompanyUseCase';
 import { GetCompaniesUseCase } from '@domain/company/application/usecases/queries/GetCompaniesUseCase';
 import { GetCompanyByIdUseCase } from '@domain/company/application/usecases/queries/GetCompanyByIdUseCase';
-import { ProductUseCaseFactory } from '@domain/product/application/factory/ProductUseCaseFactory';
-import { DatabaseModule } from '@infra/database/database.module';
+import { CompanyUseCaseFactory } from '@domain/company/application/factory/CompanyUseCaseFactory';
 
 const usecases = [
   CreateCompanyUseCase,
@@ -19,7 +18,7 @@ const usecases = [
 @Module({
   imports: [],
   controllers: [CompanyController],
-  providers: [...usecases],
-  exports: [...usecases],
+  providers: [...usecases, CompanyUseCaseFactory],
+  exports: [...usecases, CompanyUseCaseFactory],
 })
 export class CompanyModule {}

@@ -1,9 +1,7 @@
-import { ILogger } from '@infra/logger/logger.interface';
+import { ILogger } from '@core/lib/logger/logger.interface';
 import { ICompanyRepository } from '../../repositories/ICompanyRepository';
 import { IUseCase } from '@core/usecases/IUseCase';
 import {
-  CreateCompanyInputDto,
-  CreateCompanyOutputDto,
   UpdateCompanyInputDto,
   UpdateCompanyOutputDto,
 } from '../../types/company.types';

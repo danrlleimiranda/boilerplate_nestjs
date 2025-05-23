@@ -1,10 +1,4 @@
-import {
-  IsNotEmpty,
-  IsNumber,
-  IsString,
-  isString,
-  IsUUID,
-} from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator';
 import { CompanyDto } from '../../company/dto/company.dto';
 
 export class ProductDto {

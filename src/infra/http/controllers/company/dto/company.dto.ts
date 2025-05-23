@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
 import { ManagerDto } from './manager.dto';
 
 export class CompanyDto {

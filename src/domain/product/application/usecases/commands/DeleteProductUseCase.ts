@@ -1,5 +1,5 @@
 import { IUseCase } from '@core/usecases/IUseCase';
-import { ILogger } from '@infra/logger/logger.interface';
+import { ILogger } from '@core/lib/logger/logger.interface';
 import { CustomError } from '@core/errors/CustomError';
 import {
   DeleteProductInputDto,

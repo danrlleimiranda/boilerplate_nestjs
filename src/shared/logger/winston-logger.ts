@@ -1,8 +1,8 @@
-import { ILogger } from '@infra/logger/logger.interface';
-import winston from 'winston';
+import { ILogger } from '@core/lib/logger/logger.interface';
+import winston, { format } from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 const { combine, timestamp, json, errors, colorize, printf, prettyPrint } =
-  winston.format;
+  format;
 
 export class WinstonLogger implements ILogger {
   private readonly logger: winston.Logger;
@@ -25,7 +25,7 @@ export class WinstonLogger implements ILogger {
       debug: 'white',
     };
 
-    winston.addColors(colors);
+    winston.config.addColors(colors);
 
     const level = (): 'debug' | 'warn' => {
       const env = process.env.ENVIRONMENT || 'development';
@@ -47,7 +47,7 @@ export class WinstonLogger implements ILogger {
         const stack = info.stack as string | undefined;
 
         return `${timestamp} ${level}: ${message}${duration} ${stack || ''}`;
-      }),
+      })
     );
 
     const fileRotateTransport = new DailyRotateFile({
@@ -60,7 +60,7 @@ export class WinstonLogger implements ILogger {
         timestamp(),
         errors({ stack: true }),
         json(),
-        prettyPrint(),
+        prettyPrint()
       ),
     });
 
@@ -75,7 +75,7 @@ export class WinstonLogger implements ILogger {
       format: combine(
         timestamp({ format: 'YYYY-MM-DD HH:mm:ss:SSS' }),
         errors({ stack: true }),
-        json(),
+        json()
       ),
       transports,
       exceptionHandlers: [fileRotateTransport],

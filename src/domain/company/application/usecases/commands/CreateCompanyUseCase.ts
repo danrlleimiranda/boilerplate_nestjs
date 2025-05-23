@@ -1,4 +1,4 @@
-import { ILogger } from '@infra/logger/logger.interface';
+import { ILogger } from '@core/lib/logger/logger.interface';
 import { ICompanyRepository } from '../../repositories/ICompanyRepository';
 import { IUseCase } from '@core/usecases/IUseCase';
 import {
@@ -9,9 +9,7 @@ import { Company } from '@domain/company/enterprise/entities/Company';
 import { Manager } from '@domain/company/enterprise/entities/Manager';
 import { Email } from '@domain/company/enterprise/entities/value-object/Email.vo';
 import { Document } from '@domain/company/enterprise/entities/value-object/Document.vo';
-import { Injectable } from '@nestjs/common';
 
-@Injectable()
 export class CreateCompanyUseCase implements IUseCase {
   constructor(
     private readonly companyRepository: ICompanyRepository,

@@ -1,4 +1,4 @@
-import { ILogger } from '@infra/logger/logger.interface';
+import { ILogger } from '@core/lib/logger/logger.interface';
 import { IUseCase } from '@core/usecases/IUseCase';
 
 import { IProductRepository } from '../../repositories/IProductRepository';
@@ -8,9 +8,7 @@ import {
 } from '../../types/product.types';
 import { ICompanyRepository } from '@domain/company/application/repositories/ICompanyRepository';
 import { Product } from '@domain/product/enterprise/entities/Product';
-import { Injectable } from '@nestjs/common';
 
-@Injectable()
 export class CreateProductUseCase implements IUseCase {
   constructor(
     private readonly productRepository: IProductRepository,

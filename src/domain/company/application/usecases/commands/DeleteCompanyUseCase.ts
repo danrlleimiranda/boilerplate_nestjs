@@ -1,14 +1,12 @@
 import { IUseCase } from '@core/usecases/IUseCase';
 import { ICompanyRepository } from '../../repositories/ICompanyRepository';
-import { ILogger } from '@infra/logger/logger.interface';
+import { ILogger } from '@core/lib/logger/logger.interface';
 import { CustomError } from '@core/errors/CustomError';
 import {
   DeleteCompanyInputDto,
   DeleteCompanyOutputDto,
 } from '../../types/company.types';
-import { Injectable } from '@nestjs/common';
 
-@Injectable()
 export class DeleteCompanyUseCase implements IUseCase {
   constructor(
     private readonly companyRepository: ICompanyRepository,

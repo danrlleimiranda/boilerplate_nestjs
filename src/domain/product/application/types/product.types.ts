@@ -1,4 +1,3 @@
-import { CompanyDto } from '@domain/company/application/types/company.types';
 import { Company } from '@domain/company/enterprise/entities/Company';
 
 export type ProductDto = {

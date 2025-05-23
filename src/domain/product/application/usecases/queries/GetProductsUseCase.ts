@@ -1,12 +1,8 @@
 import { IUseCase } from '@core/usecases/IUseCase';
 import { IProductRepository } from '../../repositories/IProductRepository';
-import { ILogger } from '@infra/logger/logger.interface';
+import { ILogger } from '@core/lib/logger/logger.interface';
 import { CustomError } from '@core/errors/CustomError';
-import {
-  GetAllProductsOutputDto,
-  GetProductByIdInputDto,
-  GetProductByIdOutputDto,
-} from '../../types/product.types';
+import { GetAllProductsOutputDto } from '../../types/product.types';
 import { Product } from '@domain/product/enterprise/entities/Product';
 
 export class GetProductsUseCase implements IUseCase {
