@@ -25,23 +25,23 @@ export class ProductUseCaseFactory
     private readonly getProductsUseCase: GetProductsUseCase
   ) {}
 
-  createUseCase(): CreateProductUseCase {
+  createUseCase() {
     return this.createProductUseCase;
   }
 
-  updateUseCase(): UpdateProductUseCase {
+  updateUseCase() {
     return this.updateProductUseCase;
   }
 
-  deleteUseCase(): DeleteProductUseCase {
+  deleteUseCase() {
     return this.removeProductUseCase;
   }
 
-  getByIdUseCase(): GetProductByIdUseCase {
+  getByIdUseCase() {
     return this.findProductByIdUseCase;
   }
 
-  getAllUseCase(): GetProductsUseCase {
+  getAllUseCase() {
     return this.getProductsUseCase;
   }
 }

@@ -41,10 +41,7 @@ export class UpdateProductUseCase implements IUseCase {
         new UniqueEntityID(data.id || product.id.toString())
       );
 
-      const result = await this.productRepository.update(
-        data.id,
-        updatedProduct
-      );
+      const result = await this.productRepository.save(updatedProduct);
 
       return {
         id: result.id.toString(),
