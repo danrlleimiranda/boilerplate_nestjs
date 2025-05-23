@@ -1,0 +1,65 @@
+import { ILogger } from '@infra/logger/logger.interface';
+import { IProductRepository } from '../../repositories/IProductRepository';
+import { IUseCase } from '@core/usecases/IUseCase';
+import {
+  UpdateProductInputDto,
+  UpdateProductOutputDto,
+} from '../../types/product.types';
+import { Product } from '@domain/product/enterprise/entities/Product';
+import { CustomError } from '@core/errors/CustomError';
+import { UniqueEntityID } from '@core/entities/UniqueEntityId';
+import { Company } from '@domain/company/enterprise/entities/Company';
+import { ICompanyRepository } from '@domain/company/application/repositories/ICompanyRepository';
+
+export class UpdateProductUseCase implements IUseCase {
+  constructor(
+    private readonly productRepository: IProductRepository,
+    private readonly companyRepository: ICompanyRepository,
+    private logger: ILogger
+  ) {}
+  async execute(
+    data: UpdateProductInputDto
+  ): Promise<UpdateProductOutputDto | undefined> {
+    try {
+      const product = await this.productRepository.findOne(data.id);
+      if (!product) {
+        this.logger.error(
+          `Product with id ${data.id} not found`,
+          new CustomError('NotFound', 404)
+        );
+        throw new Error(`Product with id ${data.id} not found`);
+      }
+
+      const company = await this.companyRepository.findOne(data.companyId);
+      const updatedProduct = Product.create(
+        {
+          ...product,
+          name: data.name || product.name,
+          description: data.description || product.description,
+          price: data.price || product.price,
+          company,
+        },
+        new UniqueEntityID(data.id || product.id.toString())
+      );
+
+      const result = await this.productRepository.update(
+        data.id,
+        updatedProduct
+      );
+
+      return {
+        id: result.id.toString(),
+        name: result.name,
+        company,
+        description: result.description,
+        price: result.price,
+        createdAt: result.createdAt,
+        updatedAt: result.updatedAt,
+      };
+    } catch (e) {
+      const error = e as Error;
+      this.logger.error(error.message, error);
+      throw error;
+    }
+  }
+}

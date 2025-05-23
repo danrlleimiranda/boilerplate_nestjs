@@ -1,6 +1,6 @@
-import { Product } from 'prisma/generated/prisma';
+import { Product } from '@domain/product/enterprise/entities/Product';
 
-export interface ICompanyRepository {
+export interface IProductRepository {
   create(data: Product): Promise<Product>;
   save(data: Product): Promise<Product>;
   findAll(): Promise<Product[]>;

@@ -17,30 +17,28 @@ export class CompanyController {
 
   @Post()
   create(@Body() createCompanyDto: CreateCompanyDto) {
-    return this.companyUseCaseFactory
-      .getCreateCompanyUseCase()
-      .execute(createCompanyDto);
+    return this.companyUseCaseFactory.createUseCase().execute(createCompanyDto);
   }
 
   @Get()
   findAll() {
-    return this.companyUseCaseFactory.getAllCompanyUseCase().execute();
+    return this.companyUseCaseFactory.getAllUseCase().execute();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.companyUseCaseFactory.getCompanyByIdUseCase().execute({ id });
+    return this.companyUseCaseFactory.getByIdUseCase().execute({ id });
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto) {
     return this.companyUseCaseFactory
-      .getUpdateCompanyUseCase()
+      .updateUseCase()
       .execute({ id, ...updateCompanyDto });
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.companyUseCaseFactory.deleteCompanyUseCase().execute({ id });
+    return this.companyUseCaseFactory.deleteUseCase().execute({ id });
   }
 }

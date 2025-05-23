@@ -4,34 +4,44 @@ import { UpdateCompanyUseCase } from '../usecases/commands/UpdateCompanyUseCase'
 import { GetCompanyByIdUseCase } from '../usecases/queries/GetCompanyByIdUseCase';
 import { DeleteCompanyUseCase } from '../usecases/commands/DeleteCompanyUseCase';
 import { GetCompaniesUseCase } from '../usecases/queries/GetCompaniesUseCase';
+import { IUseCaseFactory } from '@core/factory/IUseCaseFactory';
 
 @Injectable()
-export class CompanyUseCaseFactory {
+export class CompanyUseCaseFactory
+  implements
+    IUseCaseFactory<
+      CreateCompanyUseCase,
+      UpdateCompanyUseCase,
+      DeleteCompanyUseCase,
+      GetCompanyByIdUseCase,
+      GetCompaniesUseCase
+    >
+{
   constructor(
     private readonly createCompanyUseCase: CreateCompanyUseCase,
     private readonly updateCompanyUseCase: UpdateCompanyUseCase,
-    private readonly removeCompanyUseCase: DeleteCompanyUseCase,
+    private readonly deleteCompanyUseCase: DeleteCompanyUseCase,
     private readonly findCompanyByIdUseCase: GetCompanyByIdUseCase,
     private readonly getCompaniesUseCase: GetCompaniesUseCase
   ) {}
 
-  getCreateCompanyUseCase(): CreateCompanyUseCase {
+  createUseCase() {
     return this.createCompanyUseCase;
   }
 
-  getUpdateCompanyUseCase(): UpdateCompanyUseCase {
+  updateUseCase() {
     return this.updateCompanyUseCase;
   }
 
-  deleteCompanyUseCase(): DeleteCompanyUseCase {
-    return this.removeCompanyUseCase;
+  deleteUseCase() {
+    return this.deleteCompanyUseCase;
   }
 
-  getCompanyByIdUseCase(): GetCompanyByIdUseCase {
+  getByIdUseCase() {
     return this.findCompanyByIdUseCase;
   }
 
-  getAllCompanyUseCase(): GetCompaniesUseCase {
+  getAllUseCase() {
     return this.getCompaniesUseCase;
   }
 }
