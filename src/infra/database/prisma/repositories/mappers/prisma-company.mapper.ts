@@ -1,26 +1,26 @@
 import { UniqueEntityID } from '@core/entities/UniqueEntityId';
 import { Company } from '@domain/company/enterprise/entities/Company';
-import { Company as PrismaCompany, Prisma } from 'prisma/generated/prisma';
+import { Prisma } from 'prisma/generated/prisma';
 export class PrismaCompanyMapper {
-  static toDomain(raw: PrismaCompany) {
+  static toDomain(raw) {
     return Company.create(
       {
-        email: raw.email,
         name: raw.name,
-        password: raw.password,
-        role: raw.role,
+        cnpj: raw.cnpj,
+        manager: raw.manager,
+        createdAt: raw.createdAt,
+        updatedAt: raw.updatedAt,
       },
       new UniqueEntityID(raw.id)
     );
   }
 
-  static toPrisma(company: Company): Prisma.ProductUncheckedCreateInput {
+  static toPrisma(company: Company): Prisma.CompanyUncheckedCreateInput {
     return {
       id: company.id.toString(),
-      email: company.email.toString(),
       name: company.name,
-      password: company.password.getValue(),
-      role: company.role,
+      managerId: company.manager.id.toString(),
+      cnpj: company.cnpj,
       createdAt: company.createdAt,
       updatedAt: company.updatedAt,
     };

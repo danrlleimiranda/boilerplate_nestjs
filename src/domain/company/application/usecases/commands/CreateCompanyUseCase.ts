@@ -9,11 +9,13 @@ import { Company } from '@domain/company/enterprise/entities/Company';
 import { Manager } from '@domain/company/enterprise/entities/Manager';
 import { Email } from '@domain/company/enterprise/entities/value-object/Email.vo';
 import { Document } from '@domain/company/enterprise/entities/value-object/Document.vo';
+import { Inject } from '@nestjs/common';
 
 export class CreateCompanyUseCase implements IUseCase {
   constructor(
+    @Inject('ICompanyRepository')
     private readonly companyRepository: ICompanyRepository,
-    private logger: ILogger
+    @Inject('ILogger') private logger: ILogger
   ) {}
   async execute(
     data: CreateCompanyInputDto

@@ -6,11 +6,13 @@ import {
   DeleteProductOutputDto,
 } from '../../types/product.types';
 import { IProductRepository } from '../../repositories/IProductRepository';
+import { Inject } from '@nestjs/common';
 
 export class DeleteProductUseCase implements IUseCase {
   constructor(
+    @Inject('IProductRepository')
     private readonly productRepository: IProductRepository,
-    private logger: ILogger
+    @Inject('ILogger') private logger: ILogger
   ) {}
   async execute(
     data: DeleteProductInputDto

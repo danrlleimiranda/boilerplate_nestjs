@@ -3,11 +3,13 @@ import { ICompanyRepository } from '../../repositories/ICompanyRepository';
 import { ILogger } from '@core/lib/logger/logger.interface';
 import { CustomError } from '@core/errors/CustomError';
 import { GetAllCompaniesOutputDto } from '../../types/company.types';
+import { Inject } from '@nestjs/common';
 
 export class GetCompaniesUseCase implements IUseCase {
   constructor(
+    @Inject('ICompanyRepository')
     private readonly companyRepository: ICompanyRepository,
-    private logger: ILogger
+    @Inject('ILogger') private logger: ILogger
   ) {}
   async execute(): Promise<GetAllCompaniesOutputDto | undefined> {
     try {

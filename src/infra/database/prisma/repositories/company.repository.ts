@@ -1,25 +1,62 @@
 import { ICompanyRepository } from '@domain/company/application/repositories/ICompanyRepository';
 import { Company } from '@domain/company/enterprise/entities/Company';
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../prisma.service';
+import { PrismaCompanyMapper } from './mappers/prisma-company.mapper';
 
 @Injectable()
 export class CompanyRepository implements ICompanyRepository {
-  create(data: Company): Promise<Company> {
-    throw new Error('Method not implemented.');
+  constructor(private readonly prisma: PrismaService) {}
+  async create(data: Company): Promise<Company> {
+    const company = PrismaCompanyMapper.toPrisma(data);
+    await this.prisma.company.create({ data: company });
+    return data;
   }
-  save(data: Company): Promise<Company> {
-    throw new Error('Method not implemented.');
+  async save(data: Company): Promise<Company> {
+    const company = PrismaCompanyMapper.toPrisma(data);
+    this.prisma.company.update({
+      where: { id: company.id },
+      data: company,
+    });
+
+    return data;
   }
-  findAll(): Promise<Company[]> {
-    throw new Error('Method not implemented.');
+  async findAll(): Promise<Company[]> {
+    const companies = await this.prisma.company.findMany({
+      select: {
+        id: true,
+        name: true,
+        cnpj: true,
+        manager: true,
+        createdAt: true,
+        updatedAt: true,
+        managerId: true,
+      },
+    });
+    return companies.map((company) => PrismaCompanyMapper.toDomain(company));
   }
-  findOne(id: string): Promise<Company> {
-    throw new Error('Method not implemented.');
+  async findOne(id: string): Promise<Company> {
+    const company = await this.prisma.company.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        name: true,
+        cnpj: true,
+        manager: true,
+        createdAt: true,
+        updatedAt: true,
+        managerId: true,
+      },
+    });
+    if (!company) {
+      throw new Error('Company not found');
+    }
+    return PrismaCompanyMapper.toDomain(company);
   }
-  update(id: string, data: Company): Promise<Company> {
-    throw new Error('Method not implemented.');
-  }
-  remove(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+
+  async remove(id: string): Promise<void> {
+    await this.prisma.company.delete({
+      where: { id },
+    });
   }
 }

@@ -1,13 +1,10 @@
 import { UniqueEntityID } from '@core/entities/UniqueEntityId';
 import { Company } from '@domain/company/enterprise/entities/Company';
 import { Product } from '@domain/product/enterprise/entities/Product';
-import {
-  Product as PrismaProduct,
-  Prisma,
-  Company as PrismaCompany,
-} from 'prisma/generated/prisma';
+import { Prisma } from 'prisma/generated/prisma';
+
 export class PrismaProductMapper {
-  static toDomain(raw: any) {
+  static toDomain(raw): Product {
     return Product.create(
       {
         company: Company.create(

@@ -39,11 +39,30 @@ export class ProductRepository implements IProductRepository {
     });
     return products.map((product) => PrismaProductMapper.toDomain(product));
   }
-  findOne(id: string): Promise<Product> {
-    throw new Error('Method not implemented.');
+  async findOne(id: string): Promise<Product> {
+    const product = await this.prisma.product.findUnique({
+      where: { id },
+      include: {
+        company: {
+          select: {
+            id: true,
+            name: true,
+            manager: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+      },
+    });
+    if (!product) {
+      throw new Error('Product not found');
+    }
+    return PrismaProductMapper.toDomain(product);
   }
 
-  remove(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+  async remove(id: string): Promise<void> {
+    await this.prisma.product.delete({
+      where: { id },
+    });
   }
 }

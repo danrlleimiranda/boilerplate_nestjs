@@ -8,12 +8,15 @@ import {
 } from '../../types/product.types';
 import { ICompanyRepository } from '@domain/company/application/repositories/ICompanyRepository';
 import { Product } from '@domain/product/enterprise/entities/Product';
+import { Inject } from '@nestjs/common';
 
 export class CreateProductUseCase implements IUseCase {
   constructor(
+    @Inject('IProductRepository')
     private readonly productRepository: IProductRepository,
+    @Inject('ICompanyRepository')
     private readonly companyRepository: ICompanyRepository,
-    private logger: ILogger
+    @Inject('ILogger') private logger: ILogger
   ) {}
   async execute(
     data: CreateProductInputDto

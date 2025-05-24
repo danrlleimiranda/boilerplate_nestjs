@@ -9,12 +9,15 @@ import { Product } from '@domain/product/enterprise/entities/Product';
 import { CustomError } from '@core/errors/CustomError';
 import { UniqueEntityID } from '@core/entities/UniqueEntityId';
 import { ICompanyRepository } from '@domain/company/application/repositories/ICompanyRepository';
+import { Inject } from '@nestjs/common';
 
 export class UpdateProductUseCase implements IUseCase {
   constructor(
+    @Inject('IProductRepository')
     private readonly productRepository: IProductRepository,
+    @Inject('ICompanyRepository')
     private readonly companyRepository: ICompanyRepository,
-    private logger: ILogger
+    @Inject('ILogger') private logger: ILogger
   ) {}
   async execute(
     data: UpdateProductInputDto

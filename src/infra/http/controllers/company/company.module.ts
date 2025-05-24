@@ -6,6 +6,9 @@ import { UpdateCompanyUseCase } from '@domain/company/application/usecases/comma
 import { GetCompaniesUseCase } from '@domain/company/application/usecases/queries/GetCompaniesUseCase';
 import { GetCompanyByIdUseCase } from '@domain/company/application/usecases/queries/GetCompanyByIdUseCase';
 import { CompanyUseCaseFactory } from '@domain/company/application/factory/CompanyUseCaseFactory';
+import { LoggerModule } from '@shared/logger/logger.module';
+import { DatabaseModule } from '@infra/database/database.module';
+import { CompanyRepository } from '@infra/database/prisma/repositories/company.repository';
 
 const usecases = [
   CreateCompanyUseCase,
@@ -16,9 +19,16 @@ const usecases = [
 ];
 
 @Module({
-  imports: [],
+  imports: [LoggerModule, DatabaseModule],
   controllers: [CompanyController],
-  providers: [...usecases, CompanyUseCaseFactory],
+  providers: [
+    ...usecases,
+    CompanyUseCaseFactory,
+    {
+      provide: 'ICompanyRepository',
+      useClass: CompanyRepository,
+    },
+  ],
   exports: [...usecases, CompanyUseCaseFactory],
 })
 export class CompanyModule {}

@@ -6,11 +6,13 @@ import {
   DeleteCompanyInputDto,
   DeleteCompanyOutputDto,
 } from '../../types/company.types';
+import { Inject } from '@nestjs/common';
 
 export class DeleteCompanyUseCase implements IUseCase {
   constructor(
+    @Inject('ICompanyRepository')
     private readonly companyRepository: ICompanyRepository,
-    private logger: ILogger
+    @Inject('ILogger') private logger: ILogger
   ) {}
   async execute(
     data: DeleteCompanyInputDto

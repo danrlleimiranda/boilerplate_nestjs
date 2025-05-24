@@ -11,11 +11,13 @@ import { UniqueEntityID } from '@core/entities/UniqueEntityId';
 import { Manager } from '@domain/company/enterprise/entities/Manager';
 import { Email } from '@domain/company/enterprise/entities/value-object/Email.vo';
 import { Document } from '@domain/company/enterprise/entities/value-object/Document.vo';
+import { Inject } from '@nestjs/common';
 
 export class UpdateCompanyUseCase implements IUseCase {
   constructor(
+    @Inject('ICompanyRepository')
     private readonly companyRepository: ICompanyRepository,
-    private logger: ILogger
+    @Inject('ILogger') private logger: ILogger
   ) {}
   async execute(
     data: UpdateCompanyInputDto
@@ -50,10 +52,7 @@ export class UpdateCompanyUseCase implements IUseCase {
         new UniqueEntityID(data.id || company.id.toString())
       );
 
-      const result = await this.companyRepository.update(
-        data.id,
-        updatedCompany
-      );
+      const result = await this.companyRepository.save(updatedCompany);
 
       return {
         id: result.id.toString(),

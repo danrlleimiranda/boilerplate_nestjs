@@ -17,6 +17,7 @@ datasource db {
 model Company {
   id        String    @id @default(uuid())
   name      String
+  cnpj      String
   managerId String    @map("manager_id")
   manager   Manager   @relation(fields: [managerId], references: [id])
   createdAt DateTime  @default(now()) @map("created_at")
