@@ -1,4 +1,4 @@
-import { Product } from '@domain/product/enterprise/entities/Product';
+import { Product } from '@domain/company/subdomain/product/enterprise/entities/Product';
 
 export interface IProductRepository {
   create(data: Product): Promise<Product>;

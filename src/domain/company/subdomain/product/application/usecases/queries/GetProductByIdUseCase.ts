@@ -6,11 +6,13 @@ import {
   GetProductByIdInputDto,
   GetProductByIdOutputDto,
 } from '../../types/product.types';
+import { Inject } from '@nestjs/common';
 
 export class GetProductByIdUseCase implements IUseCase {
   constructor(
+    @Inject('IProductRepository')
     private readonly productRepository: IProductRepository,
-    private logger: ILogger
+    @Inject('ILogger') private logger: ILogger
   ) {}
   async execute(
     data: GetProductByIdInputDto

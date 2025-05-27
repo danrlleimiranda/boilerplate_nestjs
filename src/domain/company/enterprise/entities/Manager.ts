@@ -8,6 +8,8 @@ type ManagerProps = {
   email: Email;
   phone: string;
   cpf: Document;
+  createdAt?: Date;
+  updatedAt?: Date;
 };
 
 export class Manager extends Entity<ManagerProps> {
@@ -26,6 +28,15 @@ export class Manager extends Entity<ManagerProps> {
   get cpf(): Document {
     return this.props.cpf;
   }
+
+  get createdAt(): Date {
+    return this.props.createdAt;
+  }
+
+  get updatedAt(): Date {
+    return this.props.updatedAt;
+  }
+
   static create(props: ManagerProps, id?: UniqueEntityID) {
     return new Manager(props, id);
   }

@@ -9,36 +9,36 @@ import {
 } from '@nestjs/common';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
-import { CompanyUseCaseFactory } from '@domain/company/application/factory/CompanyUseCaseFactory';
+import { CompanyUseCaseFacade } from '@domain/company/application/facade/CompanyUseCaseFacade';
 
 @Controller('company')
 export class CompanyController {
-  constructor(private readonly companyUseCaseFactory: CompanyUseCaseFactory) {}
+  constructor(private readonly companyUseCaseFacade: CompanyUseCaseFacade) {}
 
   @Post()
   create(@Body() createCompanyDto: CreateCompanyDto) {
-    return this.companyUseCaseFactory.createUseCase().execute(createCompanyDto);
+    return this.companyUseCaseFacade.createUseCase().execute(createCompanyDto);
   }
 
   @Get()
   findAll() {
-    return this.companyUseCaseFactory.getAllUseCase().execute();
+    return this.companyUseCaseFacade.getAllUseCase().execute();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.companyUseCaseFactory.getByIdUseCase().execute({ id });
+    return this.companyUseCaseFacade.getByIdUseCase().execute({ id });
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto) {
-    return this.companyUseCaseFactory
+    return this.companyUseCaseFacade
       .updateUseCase()
       .execute({ id, ...updateCompanyDto });
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.companyUseCaseFactory.deleteUseCase().execute({ id });
+    return this.companyUseCaseFacade.deleteUseCase().execute({ id });
   }
 }

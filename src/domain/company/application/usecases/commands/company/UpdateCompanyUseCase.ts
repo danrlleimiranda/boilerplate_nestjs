@@ -1,10 +1,10 @@
 import { ILogger } from '@core/lib/logger/logger.interface';
-import { ICompanyRepository } from '../../repositories/ICompanyRepository';
+import { ICompanyRepository } from '../../../repositories/ICompanyRepository';
 import { IUseCase } from '@core/usecases/IUseCase';
 import {
   UpdateCompanyInputDto,
   UpdateCompanyOutputDto,
-} from '../../types/company.types';
+} from '../../../types/company.types';
 import { Company } from '@domain/company/enterprise/entities/Company';
 import { CustomError } from '@core/errors/CustomError';
 import { UniqueEntityID } from '@core/entities/UniqueEntityId';

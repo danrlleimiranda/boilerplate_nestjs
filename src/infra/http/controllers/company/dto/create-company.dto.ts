@@ -1,5 +1,5 @@
 import { IsString, IsNotEmpty } from 'class-validator';
-import { ManagerDto } from './manager.dto';
+import { CreateManagerDto, ManagerDto } from './manager.dto';
 
 export class CreateCompanyDto {
   @IsString()
@@ -10,5 +10,5 @@ export class CreateCompanyDto {
   @IsNotEmpty()
   cnpj: string;
 
-  manager: ManagerDto;
+  managerId: string;
 }

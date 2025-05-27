@@ -1,15 +1,15 @@
-import { CreateProductUseCase } from '@domain/product/application/usecases/commands/CreateProductUseCase';
-import { DeleteProductUseCase } from '@domain/product/application/usecases/commands/DeleteProductUseCase';
-import { UpdateProductUseCase } from '@domain/product/application/usecases/commands/UpdateProductUseCase';
-import { GetProductByIdUseCase } from '@domain/product/application/usecases/queries/GetProductByIdUseCase';
+import { CreateProductUseCase } from '@domain/company/subdomain/product/application/usecases/commands/CreateProductUseCase';
+import { DeleteProductUseCase } from '@domain/company/subdomain/product/application/usecases/commands/DeleteProductUseCase';
+import { UpdateProductUseCase } from '@domain/company/subdomain/product/application/usecases/commands/UpdateProductUseCase';
+import { GetProductByIdUseCase } from '@domain/company/subdomain/product/application/usecases/queries/GetProductByIdUseCase';
 import { ProductController } from './product.controller';
 import { Module } from '@nestjs/common';
-import { GetProductsUseCase } from '@domain/product/application/usecases/queries/GetProductsUseCase';
-import { ProductUseCaseFactory } from '@domain/product/application/factory/ProductUseCaseFactory';
+import { GetProductsUseCase } from '@domain/company/subdomain/product/application/usecases/queries/GetProductsUseCase';
 import { ProductRepository } from '@infra/database/prisma/repositories/product.repository';
 import { CompanyRepository } from '@infra/database/prisma/repositories/company.repository';
 import { DatabaseModule } from '@infra/database/database.module';
 import { LoggerModule } from '@shared/logger/logger.module';
+import { ProductUseCaseFacade } from '@domain/company/subdomain/product/application/facade/ProductUseCaseFacade';
 
 const usecases = [
   CreateProductUseCase,
@@ -24,7 +24,7 @@ const usecases = [
   controllers: [ProductController],
   providers: [
     ...usecases,
-    ProductUseCaseFactory,
+    ProductUseCaseFacade,
     {
       provide: 'IProductRepository',
       useClass: ProductRepository,
@@ -34,6 +34,6 @@ const usecases = [
       useClass: CompanyRepository,
     },
   ],
-  exports: [...usecases, ProductUseCaseFactory],
+  exports: [...usecases, ProductUseCaseFacade],
 })
 export class ProductModule {}

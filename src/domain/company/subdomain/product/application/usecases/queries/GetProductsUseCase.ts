@@ -3,7 +3,7 @@ import { IProductRepository } from '../../repositories/IProductRepository';
 import { ILogger } from '@core/lib/logger/logger.interface';
 import { CustomError } from '@core/errors/CustomError';
 import { GetAllProductsOutputDto } from '../../types/product.types';
-import { Product } from '@domain/product/enterprise/entities/Product';
+import { Product } from '@domain/company/subdomain/product/enterprise/entities/Product';
 
 export class GetProductsUseCase implements IUseCase {
   constructor(

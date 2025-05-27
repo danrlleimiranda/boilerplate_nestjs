@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCompanyUseCase } from '../usecases/commands/CreateCompanyUseCase';
-import { UpdateCompanyUseCase } from '../usecases/commands/UpdateCompanyUseCase';
-import { GetCompanyByIdUseCase } from '../usecases/queries/GetCompanyByIdUseCase';
-import { DeleteCompanyUseCase } from '../usecases/commands/DeleteCompanyUseCase';
-import { GetCompaniesUseCase } from '../usecases/queries/GetCompaniesUseCase';
-import { IUseCaseFactory } from '@core/factory/IUseCaseFactory';
+import { CreateCompanyUseCase } from '../usecases/commands/company/CreateCompanyUseCase';
+import { UpdateCompanyUseCase } from '../usecases/commands/company/UpdateCompanyUseCase';
+import { GetCompanyByIdUseCase } from '../usecases/queries/company/GetCompanyByIdUseCase';
+import { DeleteCompanyUseCase } from '../usecases/commands/company/DeleteCompanyUseCase';
+import { GetCompaniesUseCase } from '../usecases/queries/company/GetCompaniesUseCase';
+import { IUseCaseFacade } from '@core/facade/IUseCaseFacade';
 
 @Injectable()
-export class CompanyUseCaseFactory
+export class CompanyUseCaseFacade
   implements
-    IUseCaseFactory<
+    IUseCaseFacade<
       CreateCompanyUseCase,
       UpdateCompanyUseCase,
       DeleteCompanyUseCase,

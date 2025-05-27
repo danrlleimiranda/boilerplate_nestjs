@@ -1,6 +1,6 @@
 import { UniqueEntityID } from '@core/entities/UniqueEntityId';
 import { Company } from '@domain/company/enterprise/entities/Company';
-import { Product } from '@domain/product/enterprise/entities/Product';
+import { Product } from '@domain/company/subdomain/product/enterprise/entities/Product';
 import { Prisma } from 'prisma/generated/prisma';
 
 export class PrismaProductMapper {

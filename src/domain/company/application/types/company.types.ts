@@ -1,24 +1,20 @@
 import { Manager } from '@domain/company/enterprise/entities/Manager';
+import { ManagerDto } from './manager.types';
 
 export type CompanyDto = {
   id: string;
   name: string;
   cnpj: string;
-  manager: {
-    id: string;
-    name: string;
-    email: string;
-    phone: string;
-    cpf: string;
-  };
+  manager: ManagerDto;
   createdAt?: Date;
   updatedAt?: Date;
 };
 
-export type CreateCompanyInputDto = Omit<
-  CompanyDto,
-  'id' | 'createdAt' | 'updatedAt'
->;
+export type CreateCompanyInputDto = {
+  name: string;
+  cnpj: string;
+  managerId: string;
+};
 
 export type CreateCompanyOutputDto = {
   id: string;

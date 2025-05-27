@@ -4,12 +4,12 @@ import { UpdateProductUseCase } from '../usecases/commands/UpdateProductUseCase'
 import { DeleteProductUseCase } from '../usecases/commands/DeleteProductUseCase';
 import { GetProductByIdUseCase } from '../usecases/queries/GetProductByIdUseCase';
 import { GetProductsUseCase } from '../usecases/queries/GetProductsUseCase';
-import { IUseCaseFactory } from '@core/factory/IUseCaseFactory';
+import { IUseCaseFacade } from '@core/facade/IUseCaseFacade';
 
 @Injectable()
-export class ProductUseCaseFactory
+export class ProductUseCaseFacade
   implements
-    IUseCaseFactory<
+    IUseCaseFacade<
       CreateProductUseCase,
       UpdateProductUseCase,
       DeleteProductUseCase,

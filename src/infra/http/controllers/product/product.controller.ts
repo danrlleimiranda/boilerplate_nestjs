@@ -9,36 +9,36 @@ import {
 } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { ProductUseCaseFactory } from '@domain/product/application/factory/ProductUseCaseFactory';
+import { ProductUseCaseFacade } from '@domain/company/subdomain/product/application/facade/ProductUseCaseFacade';
 
 @Controller('product')
 export class ProductController {
-  constructor(private readonly productUseCaseFactory: ProductUseCaseFactory) {}
+  constructor(private readonly productUseCaseFacade: ProductUseCaseFacade) {}
 
   @Post()
   create(@Body() createProductDto: CreateProductDto) {
-    return this.productUseCaseFactory.createUseCase().execute(createProductDto);
+    return this.productUseCaseFacade.createUseCase().execute(createProductDto);
   }
 
   @Get()
   findAll() {
-    return this.productUseCaseFactory.getAllUseCase();
+    return this.productUseCaseFacade.getAllUseCase();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.productUseCaseFactory.getByIdUseCase().execute({ id });
+    return this.productUseCaseFacade.getByIdUseCase().execute({ id });
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productUseCaseFactory
+    return this.productUseCaseFacade
       .updateUseCase()
       .execute({ ...updateProductDto, id });
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.productUseCaseFactory.deleteUseCase().execute({ id });
+    return this.productUseCaseFacade.deleteUseCase().execute({ id });
   }
 }

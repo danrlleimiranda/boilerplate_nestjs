@@ -17,3 +17,18 @@ export class ManagerDto {
   @IsString()
   cpf: string;
 }
+
+export class CreateManagerDto {
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  phone: string;
+
+  @IsString()
+  cpf: string;
+}

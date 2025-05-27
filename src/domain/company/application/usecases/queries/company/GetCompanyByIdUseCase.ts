@@ -1,35 +1,40 @@
 import { IUseCase } from '@core/usecases/IUseCase';
-import { ICompanyRepository } from '../../repositories/ICompanyRepository';
+import { ICompanyRepository } from '../../../repositories/ICompanyRepository';
 import { ILogger } from '@core/lib/logger/logger.interface';
 import { CustomError } from '@core/errors/CustomError';
-import { GetAllCompaniesOutputDto } from '../../types/company.types';
+import {
+  GetCompanyByIdInputDto,
+  GetCompanyByIdOutputDto,
+} from '../../../types/company.types';
 import { Inject } from '@nestjs/common';
 
-export class GetCompaniesUseCase implements IUseCase {
+export class GetCompanyByIdUseCase implements IUseCase {
   constructor(
     @Inject('ICompanyRepository')
     private readonly companyRepository: ICompanyRepository,
     @Inject('ILogger') private logger: ILogger
   ) {}
-  async execute(): Promise<GetAllCompaniesOutputDto | undefined> {
+  async execute(
+    data: GetCompanyByIdInputDto
+  ): Promise<GetCompanyByIdOutputDto | undefined> {
     try {
-      const companies = await this.companyRepository.findAll();
+      const company = await this.companyRepository.findOne(data.id);
 
-      if (!companies || companies.length === 0) {
+      if (!company) {
         this.logger.error(
-          `No companies found`,
+          `Company with id ${data.id} not found`,
           new CustomError('NotFound', 404)
         );
-        throw new Error(`No companies found`);
+        throw new Error(`Company with id ${data.id} not found`);
       }
-      return companies.map((company) => ({
+      return {
         id: company.id.toString(),
         name: company.name,
         manager: company.manager,
         cnpj: company.cnpj,
         createdAt: company.createdAt,
         updatedAt: company.updatedAt,
-      }));
+      };
     } catch (e) {
       const error = e as Error;
       this.logger.error(error.message, error);

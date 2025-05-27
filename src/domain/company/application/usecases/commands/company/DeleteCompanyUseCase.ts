@@ -1,11 +1,11 @@
 import { IUseCase } from '@core/usecases/IUseCase';
-import { ICompanyRepository } from '../../repositories/ICompanyRepository';
+import { ICompanyRepository } from '../../../repositories/ICompanyRepository';
 import { ILogger } from '@core/lib/logger/logger.interface';
 import { CustomError } from '@core/errors/CustomError';
 import {
   DeleteCompanyInputDto,
   DeleteCompanyOutputDto,
-} from '../../types/company.types';
+} from '../../../types/company.types';
 import { Inject } from '@nestjs/common';
 
 export class DeleteCompanyUseCase implements IUseCase {

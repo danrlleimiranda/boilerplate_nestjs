@@ -1,4 +1,4 @@
-export interface IUseCaseFactory<
+export interface IUseCaseFacade<
   CreateType,
   UpdateType,
   DeleteType,

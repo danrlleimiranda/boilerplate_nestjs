@@ -154,7 +154,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/dan-miranda/Documentos/projetos/boilerplate_nestjs/prisma/generated/prisma",
+      "value": "/home/danrllei/Documentos/projetos/boilerplate_nestjs/prisma/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -168,7 +168,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/dan-miranda/Documentos/projetos/boilerplate_nestjs/prisma/schema.prisma",
+    "sourceFilePath": "/home/danrllei/Documentos/projetos/boilerplate_nestjs/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

@@ -7,7 +7,7 @@ import {
   CreateProductOutputDto,
 } from '../../types/product.types';
 import { ICompanyRepository } from '@domain/company/application/repositories/ICompanyRepository';
-import { Product } from '@domain/product/enterprise/entities/Product';
+import { Product } from '@domain/company/subdomain/product/enterprise/entities/Product';
 import { Inject } from '@nestjs/common';
 
 export class CreateProductUseCase implements IUseCase {
