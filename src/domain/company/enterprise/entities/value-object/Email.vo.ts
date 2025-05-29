@@ -1,3 +1,5 @@
+import { CustomError } from '@core/errors/CustomError';
+
 export class Email {
   private readonly email: string;
 
@@ -7,7 +9,7 @@ export class Email {
 
   public static create(email: string): Email {
     if (!this.isValid(email)) {
-      throw new Error('Invalid email format');
+      throw new CustomError('Invalid email format', 400);
     }
     return new Email(email);
   }

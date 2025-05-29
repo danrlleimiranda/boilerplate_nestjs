@@ -25,7 +25,7 @@ export class DeleteManagerUseCase implements IUseCase {
           `Manager with id ${data.id} not found`,
           new CustomError('NotFound', 404)
         );
-        throw new Error(`Manager with id ${data.id} not found`);
+        throw new CustomError(`Manager with id ${data.id} not found`, 404);
       }
       await this.managerRepository.remove(data.id);
       return {

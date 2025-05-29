@@ -15,13 +15,6 @@ export class GetCompaniesUseCase implements IUseCase {
     try {
       const companies = await this.companyRepository.findAll();
 
-      if (!companies || companies.length === 0) {
-        this.logger.error(
-          `No companies found`,
-          new CustomError('NotFound', 404)
-        );
-        throw new Error(`No companies found`);
-      }
       return companies.map((company) => ({
         id: company.id.toString(),
         name: company.name,

@@ -22,7 +22,7 @@ export class ManagerController {
 
   @Get()
   findAll() {
-    return this.managerUseCaseFacade.getAllUseCase();
+    return this.managerUseCaseFacade.getAllUseCase().execute();
   }
 
   @Get(':id')

@@ -3,6 +3,7 @@ import { Company } from '@domain/company/enterprise/entities/Company';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { PrismaCompanyMapper } from './mappers/prisma-company.mapper';
+import { CustomError } from '@core/errors/CustomError';
 
 @Injectable()
 export class CompanyRepository implements ICompanyRepository {
@@ -49,7 +50,7 @@ export class CompanyRepository implements ICompanyRepository {
       },
     });
     if (!company) {
-      throw new Error('Company not found');
+      throw new CustomError('Company not found', 404);
     }
     return PrismaCompanyMapper.toDomain(company);
   }

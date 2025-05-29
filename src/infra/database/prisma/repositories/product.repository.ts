@@ -3,6 +3,7 @@ import { Product } from '@domain/company/subdomain/product/enterprise/entities/P
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { PrismaProductMapper } from './mappers/prisma-product.mapper';
+import { CustomError } from '@core/errors/CustomError';
 
 @Injectable()
 export class ProductRepository implements IProductRepository {
@@ -55,7 +56,7 @@ export class ProductRepository implements IProductRepository {
       },
     });
     if (!product) {
-      throw new Error('Product not found');
+      throw new CustomError('Product not found', 404);
     }
     return PrismaProductMapper.toDomain(product);
   }

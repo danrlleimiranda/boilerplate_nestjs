@@ -18,24 +18,24 @@ model Company {
   id        String    @id @default(uuid())
   name      String
   cnpj      String
-  managerId String    @map("manager_id")
+  managerId String    @unique @map("manager_id")
   manager   Manager   @relation(fields: [managerId], references: [id])
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime  @updatedAt @map("updated_at")
-  Product   Product[]
+  product   Product[]
 
   @@map("companies")
 }
 
 model Manager {
-  id        String    @id @default(uuid())
+  id        String   @id @default(uuid())
   name      String
   email     String
   phone     String
   cpf       String
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @updatedAt @map("updated_at")
-  Company   Company[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  company   Company?
 
   @@map("managers")
 }

@@ -1051,11 +1051,11 @@ export namespace Prisma {
    */
 
   export type CompanyCountOutputType = {
-    Product: number
+    product: number
   }
 
   export type CompanyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Product?: boolean | CompanyCountOutputTypeCountProductArgs
+    product?: boolean | CompanyCountOutputTypeCountProductArgs
   }
 
   // Custom InputTypes
@@ -1074,37 +1074,6 @@ export namespace Prisma {
    */
   export type CompanyCountOutputTypeCountProductArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProductWhereInput
-  }
-
-
-  /**
-   * Count Type ManagerCountOutputType
-   */
-
-  export type ManagerCountOutputType = {
-    Company: number
-  }
-
-  export type ManagerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Company?: boolean | ManagerCountOutputTypeCountCompanyArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * ManagerCountOutputType without action
-   */
-  export type ManagerCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ManagerCountOutputType
-     */
-    select?: ManagerCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * ManagerCountOutputType without action
-   */
-  export type ManagerCountOutputTypeCountCompanyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CompanyWhereInput
   }
 
 
@@ -1285,7 +1254,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     manager?: boolean | ManagerDefaultArgs<ExtArgs>
-    Product?: boolean | Company$ProductArgs<ExtArgs>
+    product?: boolean | Company$productArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["company"]>
 
@@ -1321,7 +1290,7 @@ export namespace Prisma {
   export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "cnpj" | "managerId" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
   export type CompanyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     manager?: boolean | ManagerDefaultArgs<ExtArgs>
-    Product?: boolean | Company$ProductArgs<ExtArgs>
+    product?: boolean | Company$productArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CompanyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1335,7 +1304,7 @@ export namespace Prisma {
     name: "Company"
     objects: {
       manager: Prisma.$ManagerPayload<ExtArgs>
-      Product: Prisma.$ProductPayload<ExtArgs>[]
+      product: Prisma.$ProductPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1739,7 +1708,7 @@ export namespace Prisma {
   export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     manager<T extends ManagerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ManagerDefaultArgs<ExtArgs>>): Prisma__ManagerClient<$Result.GetResult<Prisma.$ManagerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Product<T extends Company$ProductArgs<ExtArgs> = {}>(args?: Subset<T, Company$ProductArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    product<T extends Company$productArgs<ExtArgs> = {}>(args?: Subset<T, Company$productArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2171,9 +2140,9 @@ export namespace Prisma {
   }
 
   /**
-   * Company.Product
+   * Company.product
    */
-  export type Company$ProductArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Company$productArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -2393,8 +2362,7 @@ export namespace Prisma {
     cpf?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    Company?: boolean | Manager$CompanyArgs<ExtArgs>
-    _count?: boolean | ManagerCountOutputTypeDefaultArgs<ExtArgs>
+    company?: boolean | Manager$companyArgs<ExtArgs>
   }, ExtArgs["result"]["manager"]>
 
   export type ManagerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2429,8 +2397,7 @@ export namespace Prisma {
 
   export type ManagerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phone" | "cpf" | "createdAt" | "updatedAt", ExtArgs["result"]["manager"]>
   export type ManagerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Company?: boolean | Manager$CompanyArgs<ExtArgs>
-    _count?: boolean | ManagerCountOutputTypeDefaultArgs<ExtArgs>
+    company?: boolean | Manager$companyArgs<ExtArgs>
   }
   export type ManagerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
   export type ManagerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2438,7 +2405,7 @@ export namespace Prisma {
   export type $ManagerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Manager"
     objects: {
-      Company: Prisma.$CompanyPayload<ExtArgs>[]
+      company: Prisma.$CompanyPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2842,7 +2809,7 @@ export namespace Prisma {
    */
   export interface Prisma__ManagerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Company<T extends Manager$CompanyArgs<ExtArgs> = {}>(args?: Subset<T, Manager$CompanyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    company<T extends Manager$companyArgs<ExtArgs> = {}>(args?: Subset<T, Manager$companyArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3267,9 +3234,9 @@ export namespace Prisma {
   }
 
   /**
-   * Manager.Company
+   * Manager.company
    */
-  export type Manager$CompanyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Manager$companyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Company
      */
@@ -3283,11 +3250,6 @@ export namespace Prisma {
      */
     include?: CompanyInclude<ExtArgs> | null
     where?: CompanyWhereInput
-    orderBy?: CompanyOrderByWithRelationInput | CompanyOrderByWithRelationInput[]
-    cursor?: CompanyWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CompanyScalarFieldEnum | CompanyScalarFieldEnum[]
   }
 
   /**
@@ -4578,7 +4540,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Company"> | Date | string
     updatedAt?: DateTimeFilter<"Company"> | Date | string
     manager?: XOR<ManagerScalarRelationFilter, ManagerWhereInput>
-    Product?: ProductListRelationFilter
+    product?: ProductListRelationFilter
   }
 
   export type CompanyOrderByWithRelationInput = {
@@ -4589,22 +4551,22 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     manager?: ManagerOrderByWithRelationInput
-    Product?: ProductOrderByRelationAggregateInput
+    product?: ProductOrderByRelationAggregateInput
   }
 
   export type CompanyWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    managerId?: string
     AND?: CompanyWhereInput | CompanyWhereInput[]
     OR?: CompanyWhereInput[]
     NOT?: CompanyWhereInput | CompanyWhereInput[]
     name?: StringFilter<"Company"> | string
     cnpj?: StringFilter<"Company"> | string
-    managerId?: StringFilter<"Company"> | string
     createdAt?: DateTimeFilter<"Company"> | Date | string
     updatedAt?: DateTimeFilter<"Company"> | Date | string
     manager?: XOR<ManagerScalarRelationFilter, ManagerWhereInput>
-    Product?: ProductListRelationFilter
-  }, "id">
+    product?: ProductListRelationFilter
+  }, "id" | "managerId">
 
   export type CompanyOrderByWithAggregationInput = {
     id?: SortOrder
@@ -4641,7 +4603,7 @@ export namespace Prisma {
     cpf?: StringFilter<"Manager"> | string
     createdAt?: DateTimeFilter<"Manager"> | Date | string
     updatedAt?: DateTimeFilter<"Manager"> | Date | string
-    Company?: CompanyListRelationFilter
+    company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
   }
 
   export type ManagerOrderByWithRelationInput = {
@@ -4652,7 +4614,7 @@ export namespace Prisma {
     cpf?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    Company?: CompanyOrderByRelationAggregateInput
+    company?: CompanyOrderByWithRelationInput
   }
 
   export type ManagerWhereUniqueInput = Prisma.AtLeast<{
@@ -4666,7 +4628,7 @@ export namespace Prisma {
     cpf?: StringFilter<"Manager"> | string
     createdAt?: DateTimeFilter<"Manager"> | Date | string
     updatedAt?: DateTimeFilter<"Manager"> | Date | string
-    Company?: CompanyListRelationFilter
+    company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
   }, "id">
 
   export type ManagerOrderByWithAggregationInput = {
@@ -4769,7 +4731,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     manager: ManagerCreateNestedOneWithoutCompanyInput
-    Product?: ProductCreateNestedManyWithoutCompanyInput
+    product?: ProductCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateInput = {
@@ -4779,7 +4741,7 @@ export namespace Prisma {
     managerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    Product?: ProductUncheckedCreateNestedManyWithoutCompanyInput
+    product?: ProductUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUpdateInput = {
@@ -4789,7 +4751,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     manager?: ManagerUpdateOneRequiredWithoutCompanyNestedInput
-    Product?: ProductUpdateManyWithoutCompanyNestedInput
+    product?: ProductUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateInput = {
@@ -4799,7 +4761,7 @@ export namespace Prisma {
     managerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Product?: ProductUncheckedUpdateManyWithoutCompanyNestedInput
+    product?: ProductUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateManyInput = {
@@ -4836,7 +4798,7 @@ export namespace Prisma {
     cpf: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    Company?: CompanyCreateNestedManyWithoutManagerInput
+    company?: CompanyCreateNestedOneWithoutManagerInput
   }
 
   export type ManagerUncheckedCreateInput = {
@@ -4847,7 +4809,7 @@ export namespace Prisma {
     cpf: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    Company?: CompanyUncheckedCreateNestedManyWithoutManagerInput
+    company?: CompanyUncheckedCreateNestedOneWithoutManagerInput
   }
 
   export type ManagerUpdateInput = {
@@ -4858,7 +4820,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Company?: CompanyUpdateManyWithoutManagerNestedInput
+    company?: CompanyUpdateOneWithoutManagerNestedInput
   }
 
   export type ManagerUncheckedUpdateInput = {
@@ -4869,7 +4831,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Company?: CompanyUncheckedUpdateManyWithoutManagerNestedInput
+    company?: CompanyUncheckedUpdateOneWithoutManagerNestedInput
   }
 
   export type ManagerCreateManyInput = {
@@ -5071,14 +5033,9 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type CompanyListRelationFilter = {
-    every?: CompanyWhereInput
-    some?: CompanyWhereInput
-    none?: CompanyWhereInput
-  }
-
-  export type CompanyOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type CompanyNullableScalarRelationFilter = {
+    is?: CompanyWhereInput | null
+    isNot?: CompanyWhereInput | null
   }
 
   export type ManagerCountOrderByAggregateInput = {
@@ -5283,46 +5240,36 @@ export namespace Prisma {
     deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
   }
 
-  export type CompanyCreateNestedManyWithoutManagerInput = {
-    create?: XOR<CompanyCreateWithoutManagerInput, CompanyUncheckedCreateWithoutManagerInput> | CompanyCreateWithoutManagerInput[] | CompanyUncheckedCreateWithoutManagerInput[]
-    connectOrCreate?: CompanyCreateOrConnectWithoutManagerInput | CompanyCreateOrConnectWithoutManagerInput[]
-    createMany?: CompanyCreateManyManagerInputEnvelope
-    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+  export type CompanyCreateNestedOneWithoutManagerInput = {
+    create?: XOR<CompanyCreateWithoutManagerInput, CompanyUncheckedCreateWithoutManagerInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutManagerInput
+    connect?: CompanyWhereUniqueInput
   }
 
-  export type CompanyUncheckedCreateNestedManyWithoutManagerInput = {
-    create?: XOR<CompanyCreateWithoutManagerInput, CompanyUncheckedCreateWithoutManagerInput> | CompanyCreateWithoutManagerInput[] | CompanyUncheckedCreateWithoutManagerInput[]
-    connectOrCreate?: CompanyCreateOrConnectWithoutManagerInput | CompanyCreateOrConnectWithoutManagerInput[]
-    createMany?: CompanyCreateManyManagerInputEnvelope
-    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+  export type CompanyUncheckedCreateNestedOneWithoutManagerInput = {
+    create?: XOR<CompanyCreateWithoutManagerInput, CompanyUncheckedCreateWithoutManagerInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutManagerInput
+    connect?: CompanyWhereUniqueInput
   }
 
-  export type CompanyUpdateManyWithoutManagerNestedInput = {
-    create?: XOR<CompanyCreateWithoutManagerInput, CompanyUncheckedCreateWithoutManagerInput> | CompanyCreateWithoutManagerInput[] | CompanyUncheckedCreateWithoutManagerInput[]
-    connectOrCreate?: CompanyCreateOrConnectWithoutManagerInput | CompanyCreateOrConnectWithoutManagerInput[]
-    upsert?: CompanyUpsertWithWhereUniqueWithoutManagerInput | CompanyUpsertWithWhereUniqueWithoutManagerInput[]
-    createMany?: CompanyCreateManyManagerInputEnvelope
-    set?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    disconnect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    delete?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    update?: CompanyUpdateWithWhereUniqueWithoutManagerInput | CompanyUpdateWithWhereUniqueWithoutManagerInput[]
-    updateMany?: CompanyUpdateManyWithWhereWithoutManagerInput | CompanyUpdateManyWithWhereWithoutManagerInput[]
-    deleteMany?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
+  export type CompanyUpdateOneWithoutManagerNestedInput = {
+    create?: XOR<CompanyCreateWithoutManagerInput, CompanyUncheckedCreateWithoutManagerInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutManagerInput
+    upsert?: CompanyUpsertWithoutManagerInput
+    disconnect?: CompanyWhereInput | boolean
+    delete?: CompanyWhereInput | boolean
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutManagerInput, CompanyUpdateWithoutManagerInput>, CompanyUncheckedUpdateWithoutManagerInput>
   }
 
-  export type CompanyUncheckedUpdateManyWithoutManagerNestedInput = {
-    create?: XOR<CompanyCreateWithoutManagerInput, CompanyUncheckedCreateWithoutManagerInput> | CompanyCreateWithoutManagerInput[] | CompanyUncheckedCreateWithoutManagerInput[]
-    connectOrCreate?: CompanyCreateOrConnectWithoutManagerInput | CompanyCreateOrConnectWithoutManagerInput[]
-    upsert?: CompanyUpsertWithWhereUniqueWithoutManagerInput | CompanyUpsertWithWhereUniqueWithoutManagerInput[]
-    createMany?: CompanyCreateManyManagerInputEnvelope
-    set?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    disconnect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    delete?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
-    update?: CompanyUpdateWithWhereUniqueWithoutManagerInput | CompanyUpdateWithWhereUniqueWithoutManagerInput[]
-    updateMany?: CompanyUpdateManyWithWhereWithoutManagerInput | CompanyUpdateManyWithWhereWithoutManagerInput[]
-    deleteMany?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
+  export type CompanyUncheckedUpdateOneWithoutManagerNestedInput = {
+    create?: XOR<CompanyCreateWithoutManagerInput, CompanyUncheckedCreateWithoutManagerInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutManagerInput
+    upsert?: CompanyUpsertWithoutManagerInput
+    disconnect?: CompanyWhereInput | boolean
+    delete?: CompanyWhereInput | boolean
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutManagerInput, CompanyUpdateWithoutManagerInput>, CompanyUncheckedUpdateWithoutManagerInput>
   }
 
   export type CompanyCreateNestedOneWithoutProductInput = {
@@ -5606,7 +5553,7 @@ export namespace Prisma {
     cnpj: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    Product?: ProductCreateNestedManyWithoutCompanyInput
+    product?: ProductCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutManagerInput = {
@@ -5615,7 +5562,7 @@ export namespace Prisma {
     cnpj: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    Product?: ProductUncheckedCreateNestedManyWithoutCompanyInput
+    product?: ProductUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutManagerInput = {
@@ -5623,37 +5570,33 @@ export namespace Prisma {
     create: XOR<CompanyCreateWithoutManagerInput, CompanyUncheckedCreateWithoutManagerInput>
   }
 
-  export type CompanyCreateManyManagerInputEnvelope = {
-    data: CompanyCreateManyManagerInput | CompanyCreateManyManagerInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type CompanyUpsertWithWhereUniqueWithoutManagerInput = {
-    where: CompanyWhereUniqueInput
+  export type CompanyUpsertWithoutManagerInput = {
     update: XOR<CompanyUpdateWithoutManagerInput, CompanyUncheckedUpdateWithoutManagerInput>
     create: XOR<CompanyCreateWithoutManagerInput, CompanyUncheckedCreateWithoutManagerInput>
+    where?: CompanyWhereInput
   }
 
-  export type CompanyUpdateWithWhereUniqueWithoutManagerInput = {
-    where: CompanyWhereUniqueInput
+  export type CompanyUpdateToOneWithWhereWithoutManagerInput = {
+    where?: CompanyWhereInput
     data: XOR<CompanyUpdateWithoutManagerInput, CompanyUncheckedUpdateWithoutManagerInput>
   }
 
-  export type CompanyUpdateManyWithWhereWithoutManagerInput = {
-    where: CompanyScalarWhereInput
-    data: XOR<CompanyUpdateManyMutationInput, CompanyUncheckedUpdateManyWithoutManagerInput>
+  export type CompanyUpdateWithoutManagerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    cnpj?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: ProductUpdateManyWithoutCompanyNestedInput
   }
 
-  export type CompanyScalarWhereInput = {
-    AND?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
-    OR?: CompanyScalarWhereInput[]
-    NOT?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
-    id?: StringFilter<"Company"> | string
-    name?: StringFilter<"Company"> | string
-    cnpj?: StringFilter<"Company"> | string
-    managerId?: StringFilter<"Company"> | string
-    createdAt?: DateTimeFilter<"Company"> | Date | string
-    updatedAt?: DateTimeFilter<"Company"> | Date | string
+  export type CompanyUncheckedUpdateWithoutManagerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    cnpj?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: ProductUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateWithoutProductInput = {
@@ -5740,40 +5683,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     price?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CompanyCreateManyManagerInput = {
-    id?: string
-    name: string
-    cnpj: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type CompanyUpdateWithoutManagerInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    cnpj?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Product?: ProductUpdateManyWithoutCompanyNestedInput
-  }
-
-  export type CompanyUncheckedUpdateWithoutManagerInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    cnpj?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Product?: ProductUncheckedUpdateManyWithoutCompanyNestedInput
-  }
-
-  export type CompanyUncheckedUpdateManyWithoutManagerInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    cnpj?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

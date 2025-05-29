@@ -25,7 +25,7 @@ export class DeleteCompanyUseCase implements IUseCase {
           `Company with id ${data.id} not found`,
           new CustomError('NotFound', 404)
         );
-        throw new Error(`Company with id ${data.id} not found`);
+        throw new CustomError(`Company with id ${data.id} not found`, 404);
       }
       await this.companyRepository.remove(data.id);
       return {

@@ -13,16 +13,9 @@ export class GetManagersUseCase implements IUseCase {
   ) {}
   async execute(): Promise<GetAllManagersOutputDto | undefined> {
     try {
-      const companies = await this.managerRepository.findAll();
+      const managers = await this.managerRepository.findAll();
 
-      if (!companies || companies.length === 0) {
-        this.logger.error(
-          `No companies found`,
-          new CustomError('NotFound', 404)
-        );
-        throw new Error(`No companies found`);
-      }
-      return companies.map((manager) => ({
+      return managers.map((manager) => ({
         id: manager.id.toString(),
         name: manager.name,
         email: manager.email.value,

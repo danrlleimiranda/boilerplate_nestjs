@@ -10,6 +10,7 @@ export class PrismaManagerMapper {
         email: raw.email,
         phone: raw.phone,
         cpf: raw.cpf,
+        company: raw.company,
       },
       new UniqueEntityID(raw.id)
     );

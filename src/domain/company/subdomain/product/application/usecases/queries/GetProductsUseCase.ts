@@ -19,7 +19,7 @@ export class GetProductsUseCase implements IUseCase {
           `No products found`,
           new CustomError('NotFound', 404)
         );
-        throw new Error(`No products found`);
+        throw new CustomError(`No products found`, 404);
       }
       return products.map((product: Product) => ({
         id: product.id.toString(),

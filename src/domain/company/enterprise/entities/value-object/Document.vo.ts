@@ -1,3 +1,5 @@
+import { CustomError } from '@core/errors/CustomError';
+
 export class Document {
   private readonly value: string;
 
@@ -53,7 +55,7 @@ export class Document {
     const instance = new Document(document);
 
     if (!instance.isValidCPF(instance.value)) {
-      throw new Error('Invalid CPF');
+      throw new CustomError('Invalid CPF', 400);
     }
 
     return instance;

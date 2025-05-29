@@ -25,7 +25,7 @@ export class DeleteProductUseCase implements IUseCase {
           `Product with id ${data.id} not found`,
           new CustomError('NotFound', 404)
         );
-        throw new Error(`Product with id ${data.id} not found`);
+        throw new CustomError(`Product with id ${data.id} not found`, 404);
       }
       await this.productRepository.remove(data.id);
       return {
