@@ -38,6 +38,7 @@ export class ProductRepository implements IProductRepository {
         },
       },
     });
+
     return products.map((product) => PrismaProductMapper.toDomain(product));
   }
   async findOne(id: string): Promise<Product> {

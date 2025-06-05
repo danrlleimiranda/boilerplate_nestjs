@@ -22,7 +22,7 @@ export class ProductController {
 
   @Get()
   findAll() {
-    return this.productUseCaseFacade.getAllUseCase();
+    return this.productUseCaseFacade.getAllUseCase().execute();
   }
 
   @Get(':id')
