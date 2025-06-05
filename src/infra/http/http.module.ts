@@ -7,9 +7,16 @@ import { ProductModule } from './controllers/product/product.module';
 import { ProductUseCaseFacade } from '@domain/company/subdomain/product/application/facade/ProductUseCaseFacade';
 import { CompanyUseCaseFacade } from '@domain/company/application/facade/CompanyUseCaseFacade';
 import { ManagerModule } from './controllers/manager/manager.module';
+import { LoggerModule } from '@shared/logger/logger.module';
 
 @Module({
-  imports: [DatabaseModule, CompanyModule, ProductModule, ManagerModule],
+  imports: [
+    DatabaseModule,
+    CompanyModule,
+    ProductModule,
+    ManagerModule,
+    LoggerModule,
+  ],
   controllers: [CompanyController, ProductController],
   providers: [CompanyUseCaseFacade, ProductUseCaseFacade],
 })

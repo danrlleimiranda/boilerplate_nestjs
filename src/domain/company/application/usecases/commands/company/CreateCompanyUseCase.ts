@@ -6,9 +6,6 @@ import {
   CreateCompanyOutputDto,
 } from '../../../types/company.types';
 import { Company } from '@domain/company/enterprise/entities/Company';
-import { Manager } from '@domain/company/enterprise/entities/Manager';
-import { Email } from '@domain/company/enterprise/entities/value-object/Email.vo';
-import { Document } from '@domain/company/enterprise/entities/value-object/Document.vo';
 import { Inject } from '@nestjs/common';
 import { IManagerRepository } from '@domain/company/application/repositories/IManagerRepository';
 
@@ -26,14 +23,14 @@ export class CreateCompanyUseCase implements IUseCase {
     try {
       const manager = await this.managerRepository.findOne(data.managerId);
       const company = Company.create({ ...data, manager });
-      await this.companyRepository.create(company);
+      const response = await this.companyRepository.create(company);
       return {
-        id: company.id.toString(),
-        name: company.name,
-        manager: company.manager,
-        cnpj: company.cnpj,
-        createdAt: company.createdAt,
-        updatedAt: company.updatedAt,
+        id: response.id.toString(),
+        name: response.name,
+        manager: response.manager,
+        cnpj: response.cnpj,
+        createdAt: response.createdAt,
+        updatedAt: response.updatedAt,
       };
     } catch (e) {
       const error = e as Error;

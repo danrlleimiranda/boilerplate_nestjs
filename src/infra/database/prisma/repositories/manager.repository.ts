@@ -42,8 +42,6 @@ export class ManagerRepository implements IManagerRepository {
       },
     });
 
-    console.log(managers);
-
     return managers.map((manager) => PrismaManagerMapper.toDomain(manager));
   }
   async findOne(id: string): Promise<Manager> {

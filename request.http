@@ -1,21 +1,20 @@
 @baseUrl = http://localhost:4000
-@companyId = b06cfebb-ff68-4872-8674-511ac047ccc3
-@productId = 0f47d82d-98b2-46fa-bafb-0524de07bd45
-
-@managerId = 875b4d2a-dc22-406f-b681-952f610cb2d6
 ### Criar um novo gerente
+// @name createManager
 POST http://localhost:4000/manager
 Content-Type: application/json
 
 {
   "name": "Carlos Souza",
-  "email": "carlos.souza@example.com",
+  "email": "calito.souza@example.com",
   "phone": "11988887777",
   "cpf": "12345678909"
 }
 
+@managerId = {createManager.response.body.id}
 ### Criar uma nova empresa
-POST http://localhost:4000/company
+// @name createCompany
+POST {{baseUrl}}/company
 Content-Type: application/json
 
 {
@@ -24,14 +23,16 @@ Content-Type: application/json
   "managerId": "{{managerId}}"
 }
 
+@companyId = {{createCompany.response.body.id}}
+
 ### Buscar uma empresa por ID
-GET http://localhost:4000/company/{{companyId}}
+GET  {{baseUrl}}/company/{{companyId}}
 
 ### Listar todas as empresas
-GET http://localhost:4000/company
+GET  {{baseUrl}}/company
 
 ### Atualizar uma empresa
-PUT http://localhost:4000/company/{{companyId}}
+PUT  {{baseUrl}}/company/{{companyId}}
 Content-Type: application/json
 
 {
@@ -46,12 +47,13 @@ Content-Type: application/json
 }
 
 ### Deletar uma empresa
-DELETE http://localhost:4000/company/{{companyId}}
+DELETE  {{baseUrl}}/company/{{companyId}}
 
 ---
 
 ### Criar um novo produto
-POST http://localhost:4000/product
+// @name CreateProduct
+POST  {{baseUrl}}/product
 Content-Type: application/json
 
 {
@@ -61,14 +63,15 @@ Content-Type: application/json
   "companyId": "{{companyId}}"
 }
 
+@productId = {{{{CreateProduct.response.body.id}}}}
 ### Buscar um produto por ID
-GET http://localhost:4000/product/{{productId}}
+GET  {{baseUrl}}/product/{{productId}}
 
 ### Listar todos os produtos
-GET http://localhost:4000/product
+GET  {{baseUrl}}/product
 
 ### Atualizar um produto
-PUT http://localhost:4000/product/{{productId}}
+PUT  {{baseUrl}}/product/{{productId}}
 Content-Type: application/json
 
 {
@@ -79,16 +82,16 @@ Content-Type: application/json
 }
 
 ### Deletar um produto
-DELETE http://localhost:4000/products/{{productId}}
+DELETE  {{baseUrl}}/products/{{productId}}
 
 ### Buscar um gerente por ID
-GET http://localhost:4000/manager/{{managerId}}
+GET  {{baseUrl}}/manager/{{managerId}}
 
 ### Listar todos os gerentes
-GET http://localhost:4000/manager
+GET  {{baseUrl}}/manager
 
 ### Atualizar um gerente
-PUT http://localhost:4000/manager/{{managerId}}
+PUT  {{baseUrl}}/manager/{{managerId}}
 Content-Type: application/json
 
 {
@@ -99,4 +102,4 @@ Content-Type: application/json
 }
 
 ### Deletar um gerente
-DELETE http://localhost:4000/manager/{{managerId}}
+DELETE  {{baseUrl}}/manager/{{managerId}}

@@ -25,7 +25,7 @@ export class GetProductByIdUseCase implements IUseCase {
           `Product with id ${data.id} not found`,
           new CustomError('NotFound', 404)
         );
-        throw new CustomError(`Product with id ${data.id} not found`);
+        throw new CustomError(`Product with id ${data.id} not found`, 404);
       }
       return {
         id: product.id.toString(),
