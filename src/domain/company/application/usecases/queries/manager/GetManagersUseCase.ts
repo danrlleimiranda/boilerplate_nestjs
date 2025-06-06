@@ -1,7 +1,6 @@
 import { IUseCase } from '@core/usecases/IUseCase';
 import { IManagerRepository } from '../../../repositories/IManagerRepository';
 import { ILogger } from '@core/lib/logger/logger.interface';
-import { CustomError } from '@core/errors/CustomError';
 import { GetAllManagersOutputDto } from '../../../types/manager.types';
 import { Inject } from '@nestjs/common';
 

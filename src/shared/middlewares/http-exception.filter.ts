@@ -6,7 +6,6 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { WinstonLogger } from '@shared/logger/winston-logger';
-import { error } from 'console';
 import { Request, Response } from 'express';
 
 @Catch(HttpException, CustomError)
