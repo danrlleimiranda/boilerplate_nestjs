@@ -36,7 +36,7 @@ GET  {{baseUrl}}/company/{{companyId}}
 GET  {{baseUrl}}/company
 
 ### Atualizar uma empresa
-PUT  {{baseUrl}}/company/{{companyId}}
+PATCH   {{baseUrl}}/company/{{companyId}}
 Content-Type: application/json
 
 {
@@ -96,7 +96,7 @@ GET  {{baseUrl}}/manager/{{managerId}}
 GET  {{baseUrl}}/manager
 
 ### Atualizar um gerente
-PUT  {{baseUrl}}/manager/{{managerId}}
+PATCH  {{baseUrl}}/manager/{{managerId}}
 Content-Type: application/json
 
 {

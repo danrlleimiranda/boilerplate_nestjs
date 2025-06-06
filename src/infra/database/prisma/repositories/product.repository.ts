@@ -9,62 +9,82 @@ import { CustomError } from '@core/errors/CustomError';
 export class ProductRepository implements IProductRepository {
   constructor(private readonly prisma: PrismaService) {}
   async create(data: Product): Promise<Product> {
-    const product = PrismaProductMapper.toPrisma(data);
+    try {
+      const product = PrismaProductMapper.toPrisma(data);
 
-    await this.prisma.product.create({ data: product });
-    return data;
+      await this.prisma.product.create({ data: product });
+      return data;
+    } catch (error) {
+      throw new CustomError(error.message, 500);
+    }
   }
 
   async save(data: Product): Promise<Product> {
-    const product = PrismaProductMapper.toPrisma(data);
-    await this.prisma.product.update({
-      where: { id: product.id },
-      data: product,
-    });
+    try {
+      const product = PrismaProductMapper.toPrisma(data);
+      await this.prisma.product.update({
+        where: { id: product.id },
+        data: product,
+      });
 
-    return data;
+      return data;
+    } catch (error) {
+      throw new CustomError(error.message, 500);
+    }
   }
   async findAll(): Promise<Product[]> {
-    const products = await this.prisma.product.findMany({
-      include: {
-        company: {
-          select: {
-            id: true,
-            name: true,
-            manager: true,
-            createdAt: true,
-            updatedAt: true,
+    try {
+      const products = await this.prisma.product.findMany({
+        include: {
+          company: {
+            select: {
+              id: true,
+              name: true,
+              manager: true,
+              createdAt: true,
+              updatedAt: true,
+            },
           },
         },
-      },
-    });
+      });
 
-    return products.map((product) => PrismaProductMapper.toDomain(product));
+      return products.map((product) => PrismaProductMapper.toDomain(product));
+    } catch (error) {
+      throw new CustomError(error.message, 500);
+    }
   }
   async findOne(id: string): Promise<Product> {
-    const product = await this.prisma.product.findUnique({
-      where: { id },
-      include: {
-        company: {
-          select: {
-            id: true,
-            name: true,
-            manager: true,
-            createdAt: true,
-            updatedAt: true,
+    try {
+      const product = await this.prisma.product.findUnique({
+        where: { id },
+        include: {
+          company: {
+            select: {
+              id: true,
+              name: true,
+              manager: true,
+              createdAt: true,
+              updatedAt: true,
+            },
           },
         },
-      },
-    });
-    if (!product) {
-      throw new CustomError('Product not found', 404);
+      });
+      if (!product) {
+        throw new CustomError('Product not found', 404);
+      }
+      return PrismaProductMapper.toDomain(product);
+    } catch (error) {
+      throw new CustomError(error.message, 500);
     }
-    return PrismaProductMapper.toDomain(product);
   }
 
   async remove(id: string): Promise<void> {
-    await this.prisma.product.delete({
-      where: { id },
-    });
+    try {
+      await this.prisma.product.delete({
+        where: { id },
+      });
+    } catch (error) {
+      throw new CustomError(error.message, 500);
+    }
   }
 }

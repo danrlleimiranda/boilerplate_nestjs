@@ -44,7 +44,7 @@ $ cp .env.example .env
 # Suba o ambiente completo na primeira vez
 $ yarn compose:up
 
-# Após rodar o comando acima a primeira vez
+# Após rodar o comando acima pela primeira vez
 $ docker-compose up
 
 ```

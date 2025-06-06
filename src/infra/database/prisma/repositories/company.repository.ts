@@ -9,55 +9,75 @@ import { CustomError } from '@core/errors/CustomError';
 export class CompanyRepository implements ICompanyRepository {
   constructor(private readonly prisma: PrismaService) {}
   async create(data: Company): Promise<Company> {
-    const company = PrismaCompanyMapper.toPrisma(data);
-    await this.prisma.company.create({ data: company });
-    return data;
+    try {
+      const company = PrismaCompanyMapper.toPrisma(data);
+      await this.prisma.company.create({ data: company });
+      return data;
+    } catch (error) {
+      throw new CustomError(error.message, 500);
+    }
   }
-  async save(data: Company): Promise<Company> {
-    const company = PrismaCompanyMapper.toPrisma(data);
-    this.prisma.company.update({
-      where: { id: company.id },
-      data: company,
-    });
 
-    return data;
+  async save(data: Company): Promise<Company> {
+    try {
+      const company = PrismaCompanyMapper.toPrisma(data);
+      await this.prisma.company.update({
+        where: { id: company.id },
+        data: company,
+      });
+      return data;
+    } catch (error) {
+      throw new CustomError(error.message, 500);
+    }
   }
   async findAll(): Promise<Company[]> {
-    const companies = await this.prisma.company.findMany({
-      select: {
-        id: true,
-        name: true,
-        cnpj: true,
-        manager: true,
-        createdAt: true,
-        updatedAt: true,
-        managerId: true,
-      },
-    });
-    return companies.map((company) => PrismaCompanyMapper.toDomain(company));
+    try {
+      const companies = await this.prisma.company.findMany({
+        select: {
+          id: true,
+          name: true,
+          cnpj: true,
+          manager: true,
+          createdAt: true,
+          updatedAt: true,
+          managerId: true,
+        },
+      });
+      return companies.map((company) => PrismaCompanyMapper.toDomain(company));
+    } catch (error) {
+      throw new CustomError(error.message, 500);
+    }
   }
   async findOne(id: string): Promise<Company> {
-    const company = await this.prisma.company.findUnique({
-      where: { id },
-      select: {
-        id: true,
-        name: true,
-        cnpj: true,
-        manager: true,
-        createdAt: true,
-        updatedAt: true,
-        managerId: true,
-      },
-    });
-    if (!company) {
-      throw new CustomError('Company not found', 404);
+    try {
+      const company = await this.prisma.company.findUnique({
+        where: { id },
+        select: {
+          id: true,
+          name: true,
+          cnpj: true,
+          manager: true,
+          createdAt: true,
+          updatedAt: true,
+          managerId: true,
+        },
+      });
+      if (!company) {
+        throw new CustomError('Company not found', 404);
+      }
+      return PrismaCompanyMapper.toDomain(company);
+    } catch (error) {
+      throw new CustomError(error.message, 500);
     }
-    return PrismaCompanyMapper.toDomain(company);
   }
 
   async remove(id: string): Promise<void> {
-    await this.prisma.company.delete({
-      where: { id },
-    });
+    try {
+      await this.prisma.company.delete({
+        where: { id },
+      });
+    } catch (error) {
+      throw new CustomError(error.message, 500);
+    }
   }
 }
