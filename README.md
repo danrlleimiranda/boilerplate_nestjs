@@ -1,8 +1,53 @@
-# Boilerplate NestJS - Documentação do Projeto
+# Documentação de Estrutura e Funcionamento do Projeto
+
+<!-- TOC -->
+- [Visão Geral](#visão-geral)
+- [Pré-requisitos](#pré-requisitos)
+- [Instalação e Uso Local](#instalação-e-uso-local)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Estrutura de Pastas](#estrutura-de-pastas)
+- [Principais Diretórios](#principais-diretórios)
+- [Principais Componentes](#principais-componentes)
+- [Fluxo de Funcionamento](#fluxo-de-funcionamento)
+- [Convenções Importantes](#convenções-importantes)
+- [Exemplos de Uso](#exemplos-de-uso)
+- [Variáveis de Ambiente](#variáveis-de-ambiente)
+- [Scripts Úteis](#scripts-úteis)
+- [Troubleshooting](#troubleshooting)
+- [Roadmap / TODO](#roadmap--todo)
+- [Licença](#licença)
+- [Créditos](#créditos)
+<!-- /TOC -->
 
 ## Visão Geral
 
 Este projeto é um **boilerplate** para aplicações backend utilizando [NestJS](https://nestjs.com/), com arquitetura modular, integração com banco de dados PostgreSQL via Prisma ORM, e práticas modernas de organização de código, testes e logging.
+
+---
+
+## Pré-requisitos
+
+- [Node.js](https://nodejs.org/) >= 18.x
+- [Docker](https://www.docker.com/) e [Docker Compose](https://docs.docker.com/compose/)
+- [VS Code](https://code.visualstudio.com/) + extensão [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+
+## Instalação e Uso Local
+
+```bash
+# Clone o repositório
+$ git clone <repo-url>
+$ cd boilerplate_nestjs
+
+# Copie o arquivo de variáveis de ambiente
+$ cp .env.example .env
+
+# Suba o ambiente completo na primeira vez
+$ yarn compose:up
+
+# Após rodar o comando acima a primeira vez
+$ docker-compose up
+
+```
 
 ---
 
@@ -63,42 +108,6 @@ src/
 
 ---
 
-## Fluxo de Desenvolvimento
-
-1. **Suba os containers:**
-   ```bash
-   docker-compose up --build
-   ```
-
-2. **O backend espera o banco de dados ficar pronto, executa as migrations do Prisma e inicia o servidor NestJS.**
-
-3. **Acesse a documentação da API:**
-   ```
-   http://localhost:4000/api
-   ```
-
-4. **Testes de API:**
-   - Utilize o arquivo `request.http` com a extensão REST Client do VS Code.
-   - As variáveis de resposta podem ser capturadas usando request variables, por exemplo:
-     ```http
-     // @name createManager
-     POST http://localhost:4000/manager
-     Content-Type: application/json
-
-     {
-       "name": "Carlos ancelloti",
-       "email": "carlao.ancelloti@example.com",
-       "phone": "11988887777",
-       "cpf": "12345678909"
-     }
-
-     ###
-
-     @managerId = {{createManager.response.body.$.id}}
-     ```
-
----
-
 ## Principais Componentes
 
 - **Controllers:** Recebem as requisições HTTP e delegam para os casos de uso.
@@ -108,6 +117,22 @@ src/
 - **Entities:** Representam os objetos de domínio.
 - **Logger:** Centraliza logs de aplicação e requisições HTTP.
 - **Middlewares:** Tratamento de exceções, logging, etc.
+
+---
+
+## Fluxo de Funcionamento
+
+1. **Subida dos containers:**  
+   Execute `docker-compose up --build` para subir o ambiente completo (backend e banco de dados).
+
+2. **Inicialização:**  
+   O backend aguarda o banco de dados ficar pronto, executa as migrations do Prisma e inicia o servidor NestJS.
+
+3. **Acesso à documentação:**  
+   Acesse a documentação Swagger em `http://localhost:4000/api`.
+
+4. **Testes de API:**  
+   Utilize o arquivo `request.http` com a extensão REST Client do VS Code para testar os endpoints.
 
 ---
 
@@ -152,20 +177,57 @@ Content-Type: application/json
 
 ---
 
-## Dicas
+## Variáveis de Ambiente
 
-- Sempre execute as requisições nomeadas antes de usar variáveis dependentes.
-- Para rodar comandos dentro do container backend já rodando:
-  ```bash
-  docker-compose exec backend sh
-  ```
-- Para rodar migrations manualmente:
-  ```bash
-  yarn prisma migrate deploy
-  ```
+- `DATABASE_URL`: URL de conexão do Prisma com o PostgreSQL (ajustada para uso entre containers)
+- `POSTGRES_USER`: Usuário do banco de dados PostgreSQL (usado no docker-compose)
+- `POSTGRES_PASSWORD`: Senha do usuário do banco de dados PostgreSQL (usado no docker-compose)
+- `POSTGRES_DB`: Nome do banco de dados PostgreSQL (usado no docker-compose)
+- `PGDATA`: Caminho do diretório de dados do PostgreSQL (usado no docker-compose)
+- `PORT`: Porta do backend (padrão: 4000)
+- `NODE_ENV`: Ambiente de execução do Node.js (ex: development)
+- Outras variáveis podem ser adicionadas conforme novas features
+
+## Scripts Úteis
+
+- `npm run start:dev`: Sobe o backend em modo desenvolvimento
+- `npm run test`: Executa os testes unitários
+- `npm run lint`: Executa o linter
+- `npx prisma migrate dev`: Executa migrations em ambiente de desenvolvimento
+- `npx prisma studio`: Abre o Prisma Studio para visualizar o banco
+
+## Troubleshooting
+
+- **Permissão negada no entrypoint.sh:**
+  - Rode: `chmod +x entrypoint.sh`
+- **Porta em uso:**
+  - Altere a porta no `.env` ou pare o serviço que está usando a porta.
+- **Banco não conecta:**
+  - Verifique se o serviço do banco está de pé e se a `DATABASE_URL` está correta.
+
+## Roadmap / TODO
+
+- [ ] Implementar autenticação e autorização
+- [ ] Adicionar testes de integração
+- [ ] Melhorar cobertura de testes
+- [ ] Adicionar CI/CD
+- [ ] Documentar endpoints privados/públicos
+
+## Licença
+
+MIT
+
+## Créditos
+
+Desenvolvido por Danrllei Miranda.
 
 ---
 
-## Contato
+## Observações
 
-Dúvidas ou sugestões? Abra uma issue ou entre em contato com o mantenedor do projeto.
+- O projeto segue princípios de Clean Architecture e DDD para facilitar manutenção e escalabilidade.
+- O uso de Docker garante portabilidade e facilidade de setup do ambiente.
+- O código está preparado para testes automatizados e integração contínua.
+- **Atenção:** A autenticação ainda não foi implementada e precisa ser adicionada nas próximas etapas do projeto.
+
+---
